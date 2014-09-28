@@ -8,8 +8,6 @@
     
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="//releases.flowplayer.org/5.1.1/skin/minimalist.css">
-
     
 	<title>Portfolio | Synergy - Responsive and Interactive HTML Portfolio </title>
     
@@ -41,8 +39,11 @@
         <script type="text/javascript" src="js/libs/jquery.mousewheel.min.js"></script>
         <script type="text/javascript" src="js/mediacreed/scrollbar/mc.custom.list.js"></script>
         <script type="text/javascript" src="js/mc.modules.animation.js"></script> 
+        <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
+        <script type="text/javascript" src="js/video-js/video.min.js"></script>
         <!-- END TEMPLATE JavaScript load -->
-        <?php
+
+         <?php
 
 //include 'config.php';
 require '/Users/karan.kumar/Sites/aws-php-sample/vendor/autoload.php';
@@ -88,6 +89,7 @@ return $videoList;
 }
 $GLOBALS['movies']=getMovies($bucket,$bucketLocation);        
 ?>
+        
         <!--<script src="http://vjs.zencdn.net/c/video.js"></script>    
         Careful when using the online version because the destroy method throws an error.    
         Our version has the fix on destroy method. Until it updates we recommend using the JS file from the template.    
@@ -111,7 +113,7 @@ $GLOBALS['movies']=getMovies($bucket,$bucketLocation);
     <div id="menu-container"><!-- start #menu-container -->        
         <div class="menu-content-holder"><!-- start .menu-content-holder -->
             <div class="menu-background"></div>
-            <div id="template-logo" class="template-logo" data-href="#portfolio.html"></div> 
+            <div id="template-logo" class="template-logo" data-href="#portfolio.php"></div> 
             <div id="template-menu" class="template-menu" data-current-module-type="full_width_gallery" data-side="none" data-href="#full_width_gallery.html"><!-- start #template-menu -->
                 <div class="menu-option-holder">
                     <div class="menu-option-background"> </div>
@@ -166,7 +168,7 @@ $GLOBALS['movies']=getMovies($bucket,$bucketLocation);
                 </div>  
                 <div class="menu-option-holder" data-module-type="full_width_gallery" data-side="none">
                     <div class="menu-option-background"> </div>
-                    <div  class="menu-option-text"><a href="#portfolio.html" data-path-href="html/portfolio/">PORTFOLIO</a></div>
+                    <div  class="menu-option-text"><a href="#portfolio.php" data-path-href="html/portfolio/">PORTFOLIO</a></div>
                 </div> 
                 <div class="menu-option-holder">
                     <div class="menu-option-background"> </div>
@@ -244,7 +246,7 @@ $GLOBALS['movies']=getMovies($bucket,$bucketLocation);
                         <option value="#ethics.html">  - Ethics</option>
                         <option value="#careers.html">  - Careers</option>
                     <option value="#news.html"> NEWS</option>
-                    <option value="#portfolio.html"> PORTFOLIO</option>
+                    <option value="#portfolio.php"> PORTFOLIO</option>
                     <option value="#"> OUR PROJECTS +</option>
                         <option value="#4_columns_projects.html">  - 4 Columns Projects</option>
                         <option value="#3_columns_projects.html">  - 3 Columns Projects</option>
@@ -292,7 +294,7 @@ $GLOBALS['movies']=getMovies($bucket,$bucketLocation);
         <div id="module-container-holder" class="module-position-lc"  data-id="module-position-lc">
             <div id="module-full-width-gallery"  class="module-full-width-gallery " > <!-- .shadow-side-all-->
                 <div id="module-full-width-holder">
-                   <?php
+                       <?php
                     foreach($GLOBALS['movies'] as $movie_info)
         {
              echo'<div class="full-width-item"><img src='.array_values($movie_info)[1].' class="opacity_0" onload="animateThumb(this)" alt=""/>
@@ -504,25 +506,21 @@ $GLOBALS['movies']=getMovies($bucket,$bucketLocation);
                 <div class="full-width-preview-media-holder-background opacity_0"></div>
                 <div class="full-width-preview-media-loader"></div>
                 <div id="preview-media-holder">   
-					<!--<div id="link" data-url="http://www.google.com" data-target="_blank"></div>-->
-               <?php
+                	<!--<div id="link" data-url="http://www.google.com" data-target="_blank"></div>-->
+                 <?php
+
 
         foreach($GLOBALS['movies'] as $movie_info)
         {
             echo "<!-- here-->";
             echo
                     '<div id="preview-media-image" data-url='.array_values($movie_info)[1].' data-title="Custom Title 1" data-alt="Custom Alt 1"></div>
-                   <div id="video-wrapper" data-video-type="vimeo" data-width="640" data-height="390"
-                          data-url='.array_values($movie_info)[0].'>
+                   <div id="video-wrapper" data-video-type="standalone" data-width="640" data-height="390"
+                          data-url1='.array_values($movie_info)[0].'  data-type1="video/mp4">
                     </div>';
         };
-          ?>          
-                    <div id="preview-media-image" data-url="assets/media/portfolio/images/image2.jpg" data-title="Custom Title 2" data-alt="Custom Alt 2"></div>                    
-                    <div id="video-wrapper" data-video-type="standalone" data-width="640" data-height="390"
-                          data-url1="https://loadcachetest.s3.amazonaws.com/small.mp4" data-type1="video/mp4">
-                    </div>
-
-                    <div id="preview-media-image" data-url="assets/media/portfolio/images/image2.jpg" data-title="Custom Title 2" data-alt="Custom Alt 2"></div>                    
+          ?>
+            <div id="preview-media-image" data-url="assets/media/portfolio/images/image2.jpg" data-title="Custom Title 2" data-alt="Custom Alt 2"></div>                    
                     <div id="video-wrapper" data-video-type="vimeo" data-width="640" data-height="390"
                           data-url="http://player.vimeo.com/video/32487239?portrait=0&color=ffffff">
                     </div>

@@ -2455,14 +2455,14 @@ $(window).load(function(){
            previewInfoHolder.css("position", "fixed").css("top", "0px").css("right", "0px").css("bottom", "auto").css("height", "100%").css("width", "");
         }
         var infoWidth           = previewInfoHolder.width();
-        var checkWidth          = ( winW < 768 ) ? 0 : infoWidth;
+        var checkWidth          = ( winW < 768 ) ? 0 : 0; //infoWidth;
         if( checkWidth <= 0){
             smpPrevOpen = false;
 
             if( $(".preview-smartphone-info").length > 0){
                 $("span.hide_info", $(".preview-smartphone-info")).css("display", "none");
                 $("span.show_info", $(".preview-smartphone-info")).css("display", "block");
-               $(".preview-smartphone-info").css("display", "inline");
+               $(".preview-smartphone-info").css("display", "none");//inline
             }
         }else{
             if( $(".preview-smartphone-info").length > 0){
@@ -2524,7 +2524,7 @@ $(window).load(function(){
             );
         }
         var infoWidth  = previewInfoHolder.width();
-         var checkWidth = ( winW < 768 ) ? 0 : 0; //  infoWidth; Changed to remove the info panel
+        var checkWidth = ( winW < 768 ) ? 0 : 0; //  infoWidth; Changed to remove the info panel
         previewInfoHolder.css('display','none'); // Set info panel's display to none to remove it completely.
         if( checkWidth <= 0){
             if( $(".preview-smartphone-info").length > 0){
@@ -2548,7 +2548,7 @@ $(window).load(function(){
         function showHideFullWidthPreviewInfo( show ){
             winW       = $(window).width();
             winH       = $(window).height();
-            checkWidth = ( winW < 768 ) ? 0 : infoWidth;
+            checkWidth = ( winW < 768 ) ? 0 : 0;//infoWidth;
             checkHeight = ( winW < 768 ) ? prevRatio * winH : 0;
             var val = (-checkWidth) + "px";
             if( checkWidth <= 0){
@@ -2558,7 +2558,7 @@ $(window).load(function(){
                 /*previewInfoHolder.css("position", "absolute").css("top", "auto").css("bottom", "0px").css("right", "0px").css("height", checkHeight +"px").css("width", "100%");*/
                 previewInfoHolder.css("position", "absolute").css("top", "100%").css("width", "100%").css("z-index", "999");
                 if( $(".preview-smartphone-info").length > 0){
-                    $(".preview-smartphone-info").css("display", "block");
+                    $(".preview-smartphone-info").css("display", "none"); // block
                 }
             }else{
                 if( $(".preview-smartphone-info").length > 0){
@@ -2638,7 +2638,8 @@ $(window).load(function(){
         }
     }
     function loadFullWidthMedia(){
-        var currPreviewElem = previewMediaArr[ currIndex ];
+        var currPreviewElem = previewMediaArr[currIndex];
+        var currInfoElem = previewMediaDescArr[currIndex];
         var mediaType = $(currPreviewElem).attr("id");
         var fwMediaContainer = $("#full-width-preview-media-holder");
         if( mediaType == "preview-media-image" ){
@@ -2653,6 +2654,7 @@ $(window).load(function(){
             prevMediaLoad.css("opacity", "0" );
             var prevMediaHolder = fwMediaContainer.find("#preview-media-holder");
             prevMediaHolder.append('<img id="preview-media-load" onload="animateFullWidthPreviewMedia()" title="" alt="" />');
+            prevMediaHolder.append($(currInfoElem).children('#social-holder')[0]);
             prevMediaLoad = $("#preview-media-load");
             prevMediaLoad.attr("style", "visibility: visible; display: inline;");
             prevMediaLoad.css("opacity", "0" );
@@ -2674,8 +2676,10 @@ $(window).load(function(){
             var mediaBackMarginTop   = - mediaBackNewH * .5;
             var mediaBackMarginLeft  = - mediaBackNewW * .5;
 
-            prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " + mediaBackNewH + "px; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
-            prevMediaHolder.append('<div id="video-wrapper"></div>')
+            prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " + (mediaBackNewH) + "px; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
+            prevMediaHolder.append('<div id="video-wrapper" width="'+mediaBackNewW+'px" height="'+mediaBackNewW+'px"></div>')
+            prevMediaHolder.parent().find('#social-holder').remove(); // Remove the old ones.
+            prevMediaHolder.parent().append($(currInfoElem).children('#social-holder')[0]);
             templateAddMediaVideo( $(currPreviewElem).attr("data-video-type"), $(currPreviewElem), $("#video-wrapper") );
 
             TweenMax.to($(".full-width-preview-media-loader"), .3, {css:{opacity:"0"}, easing:Sine.easeOut});
