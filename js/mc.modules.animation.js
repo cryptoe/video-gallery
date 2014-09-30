@@ -325,6 +325,7 @@ $(window).load(function(){
 
             $("footer").css( 'display', 'inline' );
 		    TweenMax.to( $("#menu-container"), .4, { css:{left: "0px"}, ease:Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
+            menuHideClick();
             /*end start-up animation*/
         }
         if( $(window).width() <= 767 ){
@@ -344,6 +345,7 @@ $(window).load(function(){
             $("#module-container").css( "height", containerH );
 
 		    TweenMax.to( $("#menu-container"), .4, { css:{top: "0px"}, ease:Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
+            menuHideClick();
             /*end start-up animation*/
         }
         $("#template-smpartphone-menu select").change(
@@ -5415,7 +5417,7 @@ $(window).load(function(){
         var parent          = ( elemParent == undefined) ? elem : elemParent;
         var videoEmbedCode  = "";
         if( videoType == "standalone" ){
-            videoEmbedCode += '<video id="standalone-wrapper" class="video-js vjs-default-skin" controls preload="none" width="'+ elem.attr("data-width") +'" height="'+ elem.attr("data-height") +'"'
+            videoEmbedCode += '<video id="standalone-wrapper" class="video-js vjs-default-skin" controls autoplay preload="none" width="'+ elem.attr("data-width") +'" height="'+ elem.attr("data-height") +'"'
                               + 'poster="'+ elem.attr("data-poster") +'">';
             for( var i = 1; i <= 3; i++ ){
                 videoEmbedCode += '<source src="' + $(elem).attr("data-url" + i) + '" type="' + $(elem).attr("data-type" + i) + '" />';

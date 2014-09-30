@@ -55,8 +55,8 @@ function getMovies($bucket,$bucketLocation)
 // Instantiate the S3 client with your AWS credentials and desired AWS region
     $videoList=array();
 $client = S3Client::factory(array(
-    'key'    => '*',
-    'secret' => '*',
+    'key'    => 'AKIAIAECWXFL7BRCKRJQ',
+    'secret' => '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',
 ));
 
 /*try {
@@ -72,7 +72,7 @@ echo "\n";
 
 $iterator = $client->getIterator('ListObjects', array('Bucket' => $bucket));
 
-global $count;
+
 foreach ($iterator as $object) {
   //  echo $object['Key'] . "\n";
     $key=$object['Key'];
@@ -80,7 +80,6 @@ foreach ($iterator as $object) {
     if ($pos !== false) 
         {   
             $temp_link = $client->getObjectUrl($bucket, $key, null);
-            $cout++;
             $arr = array('video' => $temp_link, 'image' => str_replace('.mp4', '.jpg', $temp_link));
             array_push($videoList,$arr);
         }
